@@ -1,8 +1,168 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "فروشگاه کتاب";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- اسلایدر اخبار و تخفیف‌ها -->
+<section class="slider-section">
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="~/images/slider/slide1.jpg" alt="تخفیف ویژه کتاب‌های رمان" />
+                <div class="slide-content">
+                    <h2>تخفیف ویژه کتاب‌های رمان</h2>
+                    <p>تا 40% تخفیف برای خرید کتاب‌های رمان خارجی</p>
+                    <a href="/Books?category=رمان" class="btn">مشاهده کتاب‌ها</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="~/images/slider/slide2.jpg" alt="کتاب‌های جدید منتشر شده" />
+                <div class="slide-content">
+                    <h2>کتاب‌های جدید منتشر شده</h2>
+                    <p>آخرین عناوین منتشر شده در ماه جاری</p>
+                    <a href="/Books?sort=newest" class="btn">مشاهده جدیدترین‌ها</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="~/images/slider/slide3.jpg" alt="همایش نویسندگان معاصر" />
+                <div class="slide-content">
+                    <h2>همایش نویسندگان معاصر</h2>
+                    <p>شرکت در همایش رایگان با خرید کتاب‌های مرتبط</p>
+                    <a href="/News/1" class="btn">جزئیات همایش</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev-slide"><i class="fas fa-chevron-right"></i></button>
+            <button class="next-slide"><i class="fas fa-chevron-left"></i></button>
+        </div>
+        <div class="slider-dots"></div>
+    </div>
+</section>
+
+<!-- تازه‌ترین کتاب‌ها -->
+<section class="book-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>تازه‌ترین کتاب‌ها</h2>
+            <a href="/Books?sort=newest" class="view-all">مشاهده همه</a>
+        </div>
+        <div class="book-grid">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="~/images/books/book@(i+1).jpg" alt="عنوان کتاب" />
+                        <div class="book-badge new">جدید</div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">عنوان کتاب نمونه @(i + 1)</h3>
+                        <p class="book-author">نویسنده کتاب</p>
+                        <div class="book-price">
+                            <span class="current-price">75,000 تومان</span>
+                            <span class="original-price">90,000 تومان</span>
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary">افزودن به سبد</button>
+                            <a href="/Book/1" class="btn btn-outline">جزئیات</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- پرفروش‌ترین کتاب‌ها -->
+<section class="book-section bg-light">
+    <div class="container">
+        <div class="section-header">
+            <h2>پرفروش‌ترین کتاب‌ها</h2>
+            <a href="/Books?sort=bestselling" class="view-all">مشاهده همه</a>
+        </div>
+        <div class="book-grid">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="~/images/books/book@(i+5).jpg" alt="عنوان کتاب" />
+                        <div class="book-badge bestseller">پرفروش</div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">عنوان کتاب پرفروش @(i + 1)</h3>
+                        <p class="book-author">نویسنده کتاب</p>
+                        <div class="book-price">
+                            <span class="current-price">65,000 تومان</span>
+                            @if (i % 2 == 0)
+                            {
+                                <span class="original-price">80,000 تومان</span>
+                            }
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary">افزودن به سبد</button>
+                            <a href="/Book/1" class="btn btn-outline">جزئیات</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- کتاب‌های تخفیف‌دار -->
+<section class="book-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>کتاب‌های تخفیف‌دار</h2>
+            <a href="/Books?sort=discount" class="view-all">مشاهده همه</a>
+        </div>
+        <div class="book-grid">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="~/images/books/book@(i+9).jpg" alt="عنوان کتاب" />
+                        <div class="book-badge discount">%@((i + 2) * 10) تخفیف</div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">عنوان کتاب تخفیف‌دار @(i + 1)</h3>
+                        <p class="book-author">نویسنده کتاب</p>
+                        <div class="book-price">
+                            <span class="current-price">@(55 - (i * 5)),000 تومان</span>
+                            <span class="original-price">@(80 - (i * 5)),000 تومان</span>
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary">افزودن به سبد</button>
+                            <a href="/Book/1" class="btn btn-outline">جزئیات</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- بخش اخبار و مقالات -->
+<section class="news-section bg-light">
+    <div class="container">
+        <div class="section-header">
+            <h2>آخرین اخبار و مقالات</h2>
+            <a href="/News" class="view-all">مشاهده همه</a>
+        </div>
+        <div class="news-grid">
+            @* @for (int i = 0; i < 3; i++) *@
+            {
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="~/images/news/news(i+1).jpg" alt="عنوان خبر" />
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">@DateTime.Now.ToString("yyyy/MM/dd")</span>
+                        <h3><a href="/News/1">عنوان خبر یا مقاله نمونه (i + 1)</a></h3>
+                        <p>خلاصه خبر یا مقاله در این قسمت قرار می‌گیرد. این متن فقط برای نمونه است و می‌تواند تغییر کند.</p>
+                        <a href="/News/1" class="read-more">ادامه مطلب</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
