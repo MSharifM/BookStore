@@ -1,7 +1,29 @@
+using BookStore.Core.Services.Interfaces;
+using BookStore.DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region DataBase Context
+
+builder.Services.AddDbContext<BookStoreContext>(option =>
+{
+    option.UseMySql(
+        builder.Configuration.GetConnectionString("BookStoreConnection"),
+        new MySqlServerVersion(new Version(8, 0, 41))
+    );
+});
+
+#endregion
+
+#region IoC
+
+builder.Services.AddScoped<IBookServices, BookStore.Core.Services. BookServices>();
+
+#endregion
 
 var app = builder.Build();
 
