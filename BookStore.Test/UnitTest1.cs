@@ -5,7 +5,8 @@
         [Fact]
         public void Test1()
         {
-
+            int a = 4;
+            Assert.Equal(4, a);
         }
     }
 }
