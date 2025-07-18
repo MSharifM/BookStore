@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookStore.Models;
 using BookStore.Core.Services.Interfaces;
 using System.Threading.Tasks;
+using BookStore.DataAccess.Entities;
 
 namespace BookStore.Controllers;
 
@@ -18,7 +19,22 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return Json(await _bookServices.GetAllBooksAsync());
+        var book = new Book()
+        {
+            Author = "Author1",
+            CountExist = 10,
+            DatePublishing = DateTime.Now,
+            DemoFile = "demo.pdf",
+            Description = "this is test description",
+            Image = "test.jpg",
+            IsDelete = false,
+            Name = "name 1",
+            Price = 123456789,
+            Publisher = "HAssan",
+            ShahbakCode = "1234567890123",
+        };
+        await _bookServices.AddBookAsync(book);
+        return View();
     }
 
     public IActionResult Privacy()

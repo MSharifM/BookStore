@@ -332,3 +332,515 @@
         display: none;
     }
 }
+/* صفحه جزئیات کتاب */
+.book-detail-page {
+    padding: 2rem 0;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+    .breadcrumb a {
+        color: var(--primary-color);
+    }
+
+    .breadcrumb i {
+        font-size: 0.7rem;
+        margin: 0 0.5rem;
+        color: #6c757d;
+    }
+
+.book-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.book-images {
+    position: relative;
+}
+
+.main-image {
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+    .main-image img {
+        max-height: 100%;
+        width: auto;
+        object-fit: contain;
+    }
+
+.discount-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.book-meta {
+    margin-bottom: 1.5rem;
+}
+
+.meta-item {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+    .meta-item span:first-child {
+        font-weight: 500;
+        min-width: 100px;
+        color: #6c757d;
+    }
+
+    .meta-item a {
+        color: var(--primary-color);
+    }
+
+.in-stock {
+    color: var(--success-color);
+    font-weight: 500;
+}
+
+.out-of-stock {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+.book-categories {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+    .book-categories span {
+        font-weight: 500;
+        margin-left: 0.5rem;
+        color: #6c757d;
+    }
+
+    .book-categories a {
+        background-color: #f8f9fa;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        margin: 0.25rem;
+        color: var(--dark-color);
+    }
+
+        .book-categories a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+.book-price-section {
+    margin-bottom: 2rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.final-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.discount-percent {
+    background-color: var(--danger-color);
+    color: white;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    margin-right: 0.5rem;
+}
+
+.book-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+
+.quantity-btn {
+    background: none;
+    border: none;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+
+    .quantity-btn:hover {
+        background-color: #f8f9fa;
+    }
+
+.quantity-selector input {
+    width: 50px;
+    height: 35px;
+    border: none;
+    text-align: center;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.add-to-cart {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.add-to-wishlist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* تب‌های کتاب */
+.book-tabs {
+    margin-bottom: 3rem;
+}
+
+.tabs-header {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+}
+
+    .tabs-header li {
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        position: relative;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+        .tabs-header li.active {
+            color: var(--primary-color);
+        }
+
+            .tabs-header li.active:after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                right: 0;
+                width: 100%;
+                height: 3px;
+                background-color: var(--primary-color);
+            }
+
+.tab-pane {
+    display: none;
+}
+
+    .tab-pane.active {
+        display: block;
+    }
+
+.book-description {
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .specs-table th, .specs-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #eee;
+        text-align: right;
+    }
+
+    .specs-table th {
+        background-color: #f8f9fa;
+        font-weight: 500;
+        color: var(--dark-color);
+        width: 30%;
+    }
+
+/* نظرات */
+.comments-section {
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+}
+
+.comments-list {
+    margin-bottom: 3rem;
+}
+
+.comment-item {
+    border-bottom: 1px solid #eee;
+    padding: 1.5rem 0;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.comment-author {
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.comment-date {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.comment-rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+    .comment-rating i {
+        color: #ddd;
+        font-size: 0.9rem;
+    }
+
+        .comment-rating i.active {
+            color: var(--warning-color);
+        }
+
+.comment-text {
+    line-height: 1.7;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+    border: 1px dashed #ddd;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+.add-comment {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+}
+
+    .add-comment h3 {
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        color: var(--dark-color);
+    }
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+.rating-stars {
+    display: flex;
+    direction: ltr;
+}
+
+    .rating-stars input {
+        display: none;
+    }
+
+    .rating-stars label {
+        color: #ddd;
+        cursor: pointer;
+        font-size: 1.2rem;
+        margin-left: 0.25rem;
+    }
+
+    .rating-stars input:checked ~ label {
+        color: var(--warning-color);
+    }
+
+    .rating-stars label:hover,
+    .rating-stars label:hover ~ label {
+        color: var(--warning-color);
+    }
+
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* کتاب‌های مشابه */
+.related-books {
+    margin-bottom: 3rem;
+}
+
+.related-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.related-book {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    transition: all 0.3s ease;
+}
+
+    .related-book:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem 0 rgba(58, 59, 69, 0.2);
+    }
+
+    .related-book .book-image {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .related-book .book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+    .related-book:hover .book-image img {
+        transform: scale(1.05);
+    }
+
+    .related-book .book-details {
+        padding: 1rem;
+    }
+
+        .related-book .book-details h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            height: 3rem;
+            overflow: hidden;
+        }
+
+        .related-book .book-details .book-author {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+    .related-book .book-price {
+        margin-top: 0.5rem;
+    }
+
+    .related-book .current-price {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .related-book .original-price {
+        text-decoration: line-through;
+        color: #6c757d;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+    }
+
+/* رسپانسیو */
+@media (max-width: 992px) {
+    .book-detail-container {
+        grid-template-columns: 1fr;
+    }
+
+    .main-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tabs-header {
+        flex-direction: column;
+    }
+
+        .tabs-header li {
+            border-bottom: 1px solid #eee;
+        }
+
+            .tabs-header li.active:after {
+                width: 3px;
+                height: 100%;
+                right: 0;
+                top: 0;
+            }
+
+    .related-slider {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .book-actions {
+        flex-direction: column;
+    }
+
+    .quantity-selector {
+        justify-content: center;
+    }
+
+    .add-to-cart, .add-to-wishlist {
+        width: 100%;
+    }
+}

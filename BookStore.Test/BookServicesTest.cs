@@ -26,6 +26,7 @@ namespace BookStore.Test
                     DatePublishing = DateTime.Now,
                     Author = "Test Author",
                     Price = 9,
+                    ShahbakCode = "1234567890987",
                     IsDelete = false
                 }
             };
@@ -67,6 +68,7 @@ namespace BookStore.Test
                 DatePublishing = DateTime.Now,
                 Author = "Test Author",
                 Price = 9,
+                ShahbakCode = "1234567890987",
                 IsDelete = false
             });
 

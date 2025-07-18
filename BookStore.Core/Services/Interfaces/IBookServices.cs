@@ -1,4 +1,5 @@
-﻿using BookStore.DataAccess.Entities;
+﻿using BookStore.Core.DTOs;
+using BookStore.DataAccess.Entities;
 
 namespace BookStore.Core.Services.Interfaces
 {
@@ -7,5 +8,9 @@ namespace BookStore.Core.Services.Interfaces
         public Task AddBookAsync(Book model);
 
         public Task<IEnumerable<Book>> GetAllBooksAsync();
+
+        public Task<BookDetailViewModel> GetBookDetailByIdAsync(int id);
+
+        public Task<IEnumerable<Book>> GetLatestBooksAsync();
     }
 }

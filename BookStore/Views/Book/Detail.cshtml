@@ -1,0 +1,270 @@
+﻿@model BookDetailViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="book-detail-page">
+    <div class="container">
+        <!-- مسیر ناوبری -->
+        <nav class="breadcrumb">
+            <a href="/">خانه</a>
+            <i class="fas fa-chevron-left"></i>
+            <a href="/Books">کتاب‌ها</a>
+            <i class="fas fa-chevron-left"></i>
+            <span>@Model.Name</span>
+        </nav>
+
+        <!-- بخش اصلی جزئیات کتاب -->
+        <div class="book-detail-container">
+            <div class="book-images">
+                <div class="main-image">
+                    <img src="/images/books/@Model.Image" alt="@Model.Name" />
+                    @* @if (Model.Discount > 0) *@
+                    {
+                        <div class="discount-badge">%20 تخفیف</div>
+                    }
+                </div>
+            </div>
+
+            <div class="book-info">
+                <h1 class="book-title">@Model.Name</h1>
+                <div class="book-meta">
+                    <div class="meta-item">
+                        <span>نویسنده:</span>
+                        <a href="/Author/Model.AuthorId">@Model.Author</a>
+                    </div>
+                    <div class="meta-item">
+                        <span>انتشارات:</span>
+                        <a href="/Publisher/Model.PublisherId">@Model.Publisher</a>
+                    </div>
+                    <div class="meta-item">
+                        <span>تاریخ انتشار:</span>
+                        <span>Model.DatePublishing.ToPersianDate()</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>شابک:</span>
+                        <span>@Model.ShahbakCode</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>موجودی:</span>
+                        <span class="@(Model.CountExist > 0 ? "in-stock" : "out-of-stock")">
+                            @(Model.CountExist > 0 ? "موجود" : "ناموجود")
+                        </span>
+                    </div>
+                </div>
+
+                <div class="book-categories">
+                    <span>دسته‌بندی‌ها:</span>
+                    @* @foreach (var category in Model.Categories) *@
+                    {
+                        <a href="/Category/category.Id">category.Name</a>
+                    }
+                </div>
+
+                <div class="book-price-section">
+                    @* @if (Model.Discount > 0) *@
+                    {
+                        <div class="original-price">@Model.Price.ToString("N0") تومان</div>
+                        <div class="final-price">
+                            ((Model.Price * (100 - Model.Discount) / 100).ToString("N0")) تومان
+                            <span class="discount-percent">%Model.Discount</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="final-price">@Model.Price.ToString("N0") تومان</div>
+                    }
+                </div>
+
+                <div class="book-actions">
+                    @if (Model.CountExist > 0)
+                    {
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
+                            <input type="number" value="1" min="1" max="@Model.CountExist" />
+                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <button class="btn btn-primary add-to-cart" data-book-id="Model.Id">
+                            <i class="fas fa-shopping-cart"></i> افزودن به سبد خرید
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline" disabled>موجود نیست</button>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.DemoFile))
+                    {
+                        <a href="/DemoFiles/@Model.DemoFile" class="btn btn-outline" target="_blank">
+                            <i class="fas fa-book-open"></i> مطالعه نمونه کتاب
+                        </a>
+                    }
+                    <button class="btn btn-outline add-to-wishlist" data-book-id="Model.Id">
+                        <i class="fas fa-heart"></i> افزودن به علاقه‌مندی‌ها
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- تب‌های اطلاعات کتاب -->
+        <div class="book-tabs">
+            <ul class="tabs-header">
+                <li class="active" data-tab="description">توضیحات کتاب</li>
+                <li data-tab="specs">مشخصات فنی</li>
+                <li data-tab="comments">نظرات (Model.Comments.Count)</li>
+            </ul>
+
+            <div class="tabs-content">
+                <div class="tab-pane active" id="description">
+                    <div class="book-description">
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="specs">
+                    <table class="specs-table">
+                        <tr>
+                            <th>عنوان</th>
+                            <th>مشخصات</th>
+                        </tr>
+                        <tr>
+                            <td>نام کتاب</td>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <td>نویسنده</td>
+                            <td><a href="/Author/Model.AuthorId">@Model.Author</a></td>
+                        </tr>
+                        <tr>
+                            <td>انتشارات</td>
+                            <td><a href="/Publisher/Model.PublisherId">@Model.Publisher</a></td>
+                        </tr>
+                        <tr>
+                            <td>تاریخ انتشار</td>
+                            <td>Model.DatePublishing.ToPersianDate()</td>
+                        </tr>
+                        <tr>
+                            <td>شابک</td>
+                            <td>@Model.ShahbakCode</td>
+                        </tr>
+                        <tr>
+                            <td>تعداد صفحات</td>
+                            <td>Model.PageCount صفحه</td>
+                        </tr>
+                        <tr>
+                            <td>زبان</td>
+                            <td>Model.Language</td>
+                        </tr>
+                        <tr>
+                            <td>وزن</td>
+                            <td>Model.Weight گرم</td>
+                        </tr>
+                        <tr>
+                            <td>قطع</td>
+                            <td>Model.Size</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="tab-pane" id="comments">
+                    <div class="comments-section">
+                        if (Model.Comments.Any())
+                        {
+                            <div class="comments-list">
+                                @* @foreach (var comment in Model.Comments) *@
+                                {
+                                    <div class="comment-item">
+                                        <div class="comment-header">
+                                            <div class="comment-author">comment.UserName</div>
+                                            <div class="comment-date">comment.CreatedAt.ToPersianDate()</div>
+                                            <div class="comment-rating">
+                                                @* @for (int i = 1; i <= 5; i++) *@
+                                                {
+                                                    <i class="fas fa-star (i <= comment.Rating ? "active" : "")"></i>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="comment-text">comment.Text</div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="no-comments">هنوز نظری برای این کتاب ثبت نشده است.</div>
+                        }
+
+                        <div class="add-comment">
+                            <h3>افزودن نظر</h3>
+                            <form asp-controller="Book" asp-action="AddComment" method="post">
+                                <input type="hidden" name="bookId" value="Model.Id" />
+                                <div class="form-group">
+                                    <label>امتیاز شما</label>
+                                    <div class="rating-stars">
+                                        <input type="radio" id="star5" name="rating" value="5" />
+                                        <label for="star5"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star4" name="rating" value="4" />
+                                        <label for="star4"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star3" name="rating" value="3" />
+                                        <label for="star3"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star2" name="rating" value="2" />
+                                        <label for="star2"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star1" name="rating" value="1" />
+                                        <label for="star1"><i class="fas fa-star"></i></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="commentText">نظر شما</label>
+                                    <textarea id="commentText" name="text" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">ثبت نظر</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- کتاب‌های مشابه -->
+        <div class="related-books">
+            <div class="section-header">
+                <h2>کتاب‌های مشابه</h2>
+            </div>
+            <div class="related-slider">
+                @* @foreach (var book in Model.RelatedBooks) *@
+                {
+                    <div class="related-book">
+                        <div class="book-image">
+                            <a href="/Book/@book.Id">
+                                <img src="/images/books/book.Image" alt="book.Name" />
+                            </a>
+                            @* @if (book.Discount > 0) *@
+                            {
+                                <div class="book-badge discount">%book.Discount تخفیف</div>
+                            }
+                        </div>
+                        <div class="book-details">
+                            <h3><a href="/Book/book.Id">book.Name</a></h3>
+                            <p class="book-author">book.Author</p>
+                            <div class="book-price">
+                                @* @if (book.Discount > 0) *@
+                                {
+                                    <span class="current-price">((book.Price * (100 - book.Discount) / 100).ToString("N0")) تومان</span>
+                                    <span class="original-price">book.Price.ToString("N0") تومان</span>
+                                }
+                                else
+                                {
+                                    <span class="current-price">book.Price.ToString("N0") تومان</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/book-detail.js"></script>
+}

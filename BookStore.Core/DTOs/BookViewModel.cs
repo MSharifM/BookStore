@@ -1,19 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.DataAccess.Entities
+namespace BookStore.Core.DTOs
 {
-    public class Book
+    public class BookDetailViewModel
     {
-        [Key]
-        public int BookId { get; set; }
-
         [MaxLength(150, ErrorMessage = "نام کتاب نمی تواند بیشتر از 150 کاراکتر باشد.")]
         [Required(ErrorMessage = "لطفا نام کتاب را وارد کنید.")]
         [Display(Name = "نام کتاب")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage ="لطفا کد شابک را وارد کنید.")]
-        [Display(Name ="کد شابک")]
+        [Required(ErrorMessage = "لطفا کد شابک را وارد کنید.")]
+        [Display(Name = "کد شابک")]
         [RegularExpression(@"^\d{13}$", ErrorMessage = "کد شابک باید ۱۳ رقم باشد.")]
         public string ShahbakCode { get; set; }
 
@@ -48,7 +45,5 @@ namespace BookStore.DataAccess.Entities
         [Required(ErrorMessage = "لطفا تعداد موجودی کتاب را وارد کنید.")]
         [Display(Name = "تعداد موجودی")]
         public int CountExist { get; set; }
-
-        public bool IsDelete { get; set; }
     }
 }
